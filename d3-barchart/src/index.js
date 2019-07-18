@@ -22,3 +22,13 @@ const xScale = d3.scaleBand().range([0, width])
 chart.append('g')
       .attr('transform', `translate(0, ${height})`)
       .call(d3.axisBottom(xScale));
+
+const bars = chart.selectAll()
+      .data(sample)
+      .enter()
+      .append('rect')
+  .attr('x', (s) => xScale(s.language))
+  .attr('y', (s) => yScale(s.value))
+  .attr('width', xScale.bandwidth())
+  .attr('height', (s) => height - yScale(s.value))
+
