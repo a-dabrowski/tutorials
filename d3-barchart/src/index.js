@@ -23,8 +23,8 @@ chart.append('g')
       .attr('transform', `translate(0, ${height})`)
       .call(d3.axisBottom(xScale));
 
-const bars = chart.selectAll()
-      .data(sample)
+const bars = chart.selectAll() //returns empty set
+  .data(sample) //function tells DOM how many elements should be updated
       .enter()
       .append('rect')
   .attr('x', (s) => xScale(s.language))
@@ -32,3 +32,10 @@ const bars = chart.selectAll()
   .attr('width', xScale.bandwidth())
   .attr('height', (s) => height - yScale(s.value))
 
+chart.append('g')
+  .attr('class', 'grid')
+  .call(d3.axisLeft()
+    .scale(yScale)
+    .tickSize(-width, 0, 0)
+    .tickFormat('')
+  );
