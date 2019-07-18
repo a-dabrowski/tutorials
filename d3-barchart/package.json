@@ -1,0 +1,21 @@
+{
+  "name": "d3-barchart",
+  "version": "1.0.0",
+  "description": "barchart tutorial",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "parcel": "parcel src/index.html"
+  },
+  "keywords": [
+    "tutorial"
+  ],
+  "author": "Adam Dąbrowski",
+  "license": "MIT",
+  "dependencies": {
+    "d3": "^5.9.7"
+  },
+  "devDependencies": {
+    "parcel": "^1.12.3"
+  }
+}
