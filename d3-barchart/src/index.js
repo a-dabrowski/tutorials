@@ -32,7 +32,7 @@ const bars = chart.selectAll() //returns empty set
   .attr('width', xScale.bandwidth())
   .attr('height', (s) => height - yScale(s.value))
 
-chart.append('g')
+chart.append('g') //adding horizontal grid lines to help guide eyes
   .attr('class', 'grid')
   .call(d3.axisLeft()
     .scale(yScale)
