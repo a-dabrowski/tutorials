@@ -39,3 +39,18 @@ chart.append('g') //adding horizontal grid lines to help guide eyes
     .tickSize(-width, 0, 0)
     .tickFormat('')
   );
+baseSvg.append('text')
+  .attr('x', -(height / 2) - margin)
+  .attr('y', margin / 2.4)
+  .attr('transform', 'rotate(-90)')
+  .text('love meter')
+  .attr('text-anchor', 'middle')
+  .attr('class', 'label');
+
+baseSvg.append('text')
+  .attr('x', width / 2 + margin)
+  .attr('y', 30)
+  .text('% of love')
+  .attr('text-anchor', 'middle')
+  .attr('class', 'label');
+
