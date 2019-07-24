@@ -30,7 +30,53 @@ const bars = chart.selectAll() //returns empty set
   .attr('x', (s) => xScale(s.language))
   .attr('y', (s) => yScale(s.value))
   .attr('width', xScale.bandwidth())
+  .attr('class', 'value')
   .attr('height', (s) => height - yScale(s.value))
+  .on('mouseenter', function (actual, i) {
+    console.log('enter');
+    d3.selectAll('.value').attr('opacity', 0.2);
+    d3.select(this)
+      .transition()
+      .duration(200)
+      .attr('opacity', 0.7)
+      .attr('x', (a) => xScale(a.language) - 5)
+      .attr('width', xScale.bandwidth() + 10)
+
+    const tempY = yScale(actual.value);
+    chart.append('line')
+      .attr('id', 'limit')
+      .attr('x1', 0)
+      .attr('x2', width)
+      .attr('y1', tempY)
+      .attr('y2', tempY)
+
+    bars.append('text') //text showing differences
+      .attr('class', 'divergence')
+      .attr('x', (dataPiece) => xScale(dataPiece.language) + xScale.bandwidth() / 2)
+      .attr('y', (dataPiece) => yScale(dataPiece.value) + 30)
+      .attr('fill', 'white')
+      .attr('text-anchor', 'middle')
+      .text((dataPiece, index) => {
+        const diff = (dataPiece.value - actual.value).toFixed(1);
+        console.log('boo');
+
+        let text = actual.value;
+
+        return index !== i ? text : '';
+      })
+
+
+  })
+  .on('mouseleave', function (actual, i) {
+    d3.selectAll('.value')
+      .transition()
+      .duration(200)
+      .attr('opacity', 1)
+      .attr('x', (dataPiece) => xScale(dataPiece.language))
+      .attr('width', xScale.bandwidth())
+    d3.selectAll('#limit').remove();
+    console.log('out');
+  });
 
 chart.append('g') //adding horizontal grid lines to help guide eyes
   .attr('class', 'grid')
